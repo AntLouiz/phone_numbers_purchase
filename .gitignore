@@ -1,0 +1,13 @@
+.idea
+.env
+.project
+__pycache__
+env
+data
+wheels
+.vscode
+dump
+*.log
+/node_modules/
+assets/dist/main-bundle.js
+*.swp
