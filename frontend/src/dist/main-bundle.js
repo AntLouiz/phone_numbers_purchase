@@ -64,14 +64,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./frontend/src/js/app/index.js":
-/*!**************************************!*\
-  !*** ./frontend/src/js/app/index.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./frontend/src/js/App.js":
+/*!********************************!*\
+  !*** ./frontend/src/js/App.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n\nvar _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\"));\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\n__webpack_require__(/*! ../../sass/App.sass */ \"./frontend/src/sass/App.sass\");\n\nvar _store = _interopRequireDefault(__webpack_require__(/*! ./store */ \"./frontend/src/js/app/store.js\"));\n\nvar _Counter = _interopRequireDefault(__webpack_require__(/*! ../components/Counter */ \"./frontend/src/js/components/Counter/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nfunction App() {\n  return /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"h1\", null, \"My Flask + React web app\"), /*#__PURE__*/_react[\"default\"].createElement(_Counter[\"default\"], null));\n}\n\n_reactDom[\"default\"].render( /*#__PURE__*/_react[\"default\"].createElement(_reactRedux.Provider, {\n  store: _store[\"default\"]\n}, /*#__PURE__*/_react[\"default\"].createElement(App, null)), document.getElementById('react-app'));\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/app/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = App;\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n\nvar _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\"));\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\n__webpack_require__(/*! ./App.sass */ \"./frontend/src/js/App.sass\");\n\nvar _store = _interopRequireDefault(__webpack_require__(/*! ./app/store */ \"./frontend/src/js/app/store.js\"));\n\nvar _Counter = _interopRequireDefault(__webpack_require__(/*! ./components/Counter */ \"./frontend/src/js/components/Counter/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nfunction App() {\n  return /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"h1\", null, \"My Flask + React web app\"), /*#__PURE__*/_react[\"default\"].createElement(_Counter[\"default\"], null));\n}\n\n_reactDom[\"default\"].render( /*#__PURE__*/_react[\"default\"].createElement(_reactRedux.Provider, {\n  store: _store[\"default\"]\n}, /*#__PURE__*/_react[\"default\"].createElement(App, null)), document.getElementById('react-app'));\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/App.js?");
 
 /***/ }),
 
@@ -82,7 +82,7 @@ eval("\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = void 0;\n\nvar _toolkit = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\n\nvar _counterSlice = _interopRequireDefault(__webpack_require__(/*! ../features/counterSlice */ \"./frontend/src/js/features/counterSlice.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nvar _default = (0, _toolkit.configureStore)({\n  reducer: {\n    counter: _counterSlice[\"default\"]\n  }\n});\n\nexports.default = _default;\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/app/store.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = void 0;\n\nvar _toolkit = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\n\nvar _counterSlice = _interopRequireDefault(__webpack_require__(/*! ../ducks/counterSlice */ \"./frontend/src/js/ducks/counterSlice.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nvar _default = (0, _toolkit.configureStore)({\n  reducer: {\n    counter: _counterSlice[\"default\"]\n  }\n});\n\nexports.default = _default;\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/app/store.js?");
 
 /***/ }),
 
@@ -93,29 +93,29 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = Counter;\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _counterSlice = __webpack_require__(/*! ../../features/counterSlice */ \"./frontend/src/js/features/counterSlice.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nfunction Counter() {\n  var count = (0, _reactRedux.useSelector)(function (state) {\n    return state.counter.value;\n  });\n  var dispatch = (0, _reactRedux.useDispatch)();\n  return /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"button\", {\n    \"aria-label\": \"Decrement value\",\n    onClick: function onClick() {\n      return dispatch((0, _counterSlice.decrement)());\n    }\n  }, \"Decrement\"), /*#__PURE__*/_react[\"default\"].createElement(\"span\", null, count), /*#__PURE__*/_react[\"default\"].createElement(\"button\", {\n    \"aria-label\": \"Increment value\",\n    onClick: function onClick() {\n      return dispatch((0, _counterSlice.increment)());\n    }\n  }, \"Incremet\")));\n}\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/components/Counter/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = Counter;\n\nvar _react = _interopRequireDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _counterSlice = __webpack_require__(/*! ../../ducks/counterSlice */ \"./frontend/src/js/ducks/counterSlice.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { \"default\": obj }; }\n\nfunction Counter() {\n  var count = (0, _reactRedux.useSelector)(function (state) {\n    return state.counter.value;\n  });\n  var dispatch = (0, _reactRedux.useDispatch)();\n  return /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"div\", null, /*#__PURE__*/_react[\"default\"].createElement(\"button\", {\n    \"aria-label\": \"Decrement value\",\n    onClick: function onClick() {\n      return dispatch((0, _counterSlice.decrement)());\n    }\n  }, \"Decrement\"), /*#__PURE__*/_react[\"default\"].createElement(\"span\", null, count), /*#__PURE__*/_react[\"default\"].createElement(\"button\", {\n    \"aria-label\": \"Increment value\",\n    onClick: function onClick() {\n      return dispatch((0, _counterSlice.increment)());\n    }\n  }, \"Incremet\")));\n}\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/components/Counter/index.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/js/features/counterSlice.js":
-/*!**************************************************!*\
-  !*** ./frontend/src/js/features/counterSlice.js ***!
-  \**************************************************/
+/***/ "./frontend/src/js/ducks/counterSlice.js":
+/*!***********************************************!*\
+  !*** ./frontend/src/js/ducks/counterSlice.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = exports.incrementByAmount = exports.decrement = exports.increment = exports.counterSlice = void 0;\n\nvar _toolkit = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\n\nvar counterSlice = (0, _toolkit.createSlice)({\n  name: 'counter',\n  initialState: {\n    value: 0\n  },\n  reducers: {\n    increment: function increment(state) {\n      state.value += 1;\n    },\n    decrement: function decrement(state) {\n      state.value -= 1;\n    },\n    incrementByAmount: function incrementByAmount(state, action) {\n      state.value += action.payload;\n    }\n  }\n});\nexports.counterSlice = counterSlice;\nvar _counterSlice$actions = counterSlice.actions,\n    increment = _counterSlice$actions.increment,\n    decrement = _counterSlice$actions.decrement,\n    incrementByAmount = _counterSlice$actions.incrementByAmount;\nexports.incrementByAmount = incrementByAmount;\nexports.decrement = decrement;\nexports.increment = increment;\nvar _default = counterSlice.reducer;\nexports.default = _default;\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/features/counterSlice.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nexports.default = exports.incrementByAmount = exports.decrement = exports.increment = exports.counterSlice = void 0;\n\nvar _toolkit = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\n\nvar counterSlice = (0, _toolkit.createSlice)({\n  name: 'counter',\n  initialState: {\n    value: 0\n  },\n  reducers: {\n    increment: function increment(state) {\n      state.value += 1;\n    },\n    decrement: function decrement(state) {\n      state.value -= 1;\n    },\n    incrementByAmount: function incrementByAmount(state, action) {\n      state.value += action.payload;\n    }\n  }\n});\nexports.counterSlice = counterSlice;\nvar _counterSlice$actions = counterSlice.actions,\n    increment = _counterSlice$actions.increment,\n    decrement = _counterSlice$actions.decrement,\n    incrementByAmount = _counterSlice$actions.incrementByAmount;\nexports.incrementByAmount = incrementByAmount;\nexports.decrement = decrement;\nexports.increment = increment;\nvar _default = counterSlice.reducer;\nexports.default = _default;\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/ducks/counterSlice.js?");
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/sass/App.sass":
-/*!*****************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/sass/App.sass ***!
-  \*****************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/js/App.sass":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/js/App.sass ***!
+  \***************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"body {\\n  background: #eee;\\n}\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/sass/App.sass?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"body {\\n  background: #baccff;\\n}\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/App.sass?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -613,14 +613,14 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 
 /***/ }),
 
-/***/ "./frontend/src/sass/App.sass":
-/*!************************************!*\
-  !*** ./frontend/src/sass/App.sass ***!
-  \************************************/
+/***/ "./frontend/src/js/App.sass":
+/*!**********************************!*\
+  !*** ./frontend/src/js/App.sass ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!./App.sass */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/sass/App.sass\");\n\n            \n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__.default, options);\n\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/sass/App.sass?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!./App.sass */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/js/App.sass\");\n\n            \n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__.default, options);\n\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_App_sass__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});\n\n//# sourceURL=webpack://phone_numbers_purchase/./frontend/src/js/App.sass?");
 
 /***/ }),
 
@@ -707,7 +707,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./frontend/src/js/app/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./frontend/src/js/App.js");
 /******/ 	
 /******/ })()
 ;

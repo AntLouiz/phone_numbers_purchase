@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var bundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
-  entry: path.join(__dirname, 'frontend/src/js/app/index.js'),
+  entry: path.join(__dirname, 'frontend/src/js/App.js'),
   output: {
     path: path.join(__dirname, 'frontend/src/dist'),
     filename: '[name]-bundle.js'

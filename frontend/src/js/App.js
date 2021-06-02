@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import '../../sass/App.sass'
-import store from './store'
-import Counter from '../components/Counter'
+import './App.sass'
+import store from './app/store'
+import Counter from './components/Counter'
 
 
-function App () {
+export default function App () {
   return (
     <div>
       <h1>My Flask + React web app</h1>
