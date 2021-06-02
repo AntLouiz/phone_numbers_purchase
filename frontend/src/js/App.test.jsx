@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import { render as rtlRender, screen } from "@testing-library/react"
 import App from './App'
-import store from '../../app/store'
+import store from './app/store'
 
 const render = (ui) => {
   const Wrapper = ({children}) => <Provider store={store}>{children}</Provider>
@@ -12,11 +12,9 @@ const render = (ui) => {
 }
 
 describe("App Component", () => {
-    test("should assert app class to be in document", () => {
-      let component = render(<App />)
-      let tree = component.toJSON();
-      console.log(tree)
-      let countElement = screen.getByRole('div', {id: 'react-app'})
-      expect(countElement).toBeInTheDocument()
+    test("should assert header to be in document", () => {
+      render(<App />)
+      const header = screen.getByText('My Flask + React web app')
+      expect(header).toBeInTheDocument();
     })
 })
