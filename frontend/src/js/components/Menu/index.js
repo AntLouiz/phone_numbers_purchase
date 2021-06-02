@@ -1,9 +1,10 @@
 import React from 'react'
-import {Navbar, Nav, Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
+import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
+import './Menu.scss'
 
 export default function Menu () {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" collapseOnSelect={true}>
       <Navbar.Brand href="#">PhoneNumbers</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
@@ -22,7 +23,7 @@ export default function Menu () {
             className="mr-2"
             aria-label="Search"
           />
-          <Button variant="outline-success">Search</Button>
+          <Button variant="outline-success">search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
