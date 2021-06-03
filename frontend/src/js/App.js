@@ -7,7 +7,7 @@ import {
 import './App.scss'
 import Menu from './components/Menu'
 import Home from './containers/Home'
-import Phones from './containers/Phones'
+import Purchase from './containers/Purchase'
 import MyPhones from './containers/MyPhones'
 import Footer from './containers/Footer'
 
@@ -25,7 +25,7 @@ export default function App () {
       <Route
         path='/purchase'
         exact={true}
-        render={() => <Phones name="phone"/>}
+        render={() => <Purchase name="phone"/>}
       />
       <Route
         path='/my-numbers'
