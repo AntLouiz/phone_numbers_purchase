@@ -78,9 +78,30 @@ export default function Paginator (props) {
     items.push(pageLink)
   }
 
+  let isFirstIndex = state.active == 1
+  let isLastIndex = state.active == totalPages
+  let next = state.active + 1 <= totalPages? state.active + 1: state.active
+  let prev = state.active - 1 >= 1? state.active - 1: state.active
+
   return (
     <Pagination>
-      {items}
+      <Pagination.First
+        disabled={isFirstIndex}
+        onClick={() => handleItemClick(1)}
+      />
+      <Pagination.Prev
+        disabled={isFirstIndex}
+        onClick={() => handleItemClick(prev)}
+      />
+        {items}
+      <Pagination.Next
+        disabled={isLastIndex}
+        onClick={() => handleItemClick(next)}
+      />
+      <Pagination.Last
+        disabled={isLastIndex}
+        onClick={() => handleItemClick(totalPages)}
+      />
     </Pagination>
   )
 }
