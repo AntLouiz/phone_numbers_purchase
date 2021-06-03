@@ -5,7 +5,9 @@ import { Pagination } from 'react-bootstrap'
 
 export default function Paginator (props) {
   const pageIndex = props.pageIndex
-  const totalPages = props.totalPages
+  const count = props.count
+  const pageSize = props.pageSize
+  const totalPages = Math.ceil(count/pageSize)
   const handleClick = props.handleClick
 
   const defaultState = {active: pageIndex}

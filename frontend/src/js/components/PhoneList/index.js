@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
+import { PAGE_SIZE } from '../../settings'
 import { getPhones } from '../../ducks/phoneListSlice'
 import Paginator from '../Paginator'
 
@@ -37,7 +38,8 @@ export default function PhoneList () {
       <Row>
         <Paginator
           pageIndex={1}
-          totalPages={count}
+          pageSize={PAGE_SIZE}
+          count={count}
           handleClick={handlePageClick}
         />
       </Row>

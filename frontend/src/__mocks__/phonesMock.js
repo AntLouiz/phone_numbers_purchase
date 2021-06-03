@@ -1,6 +1,6 @@
 function getMockedPhones () {
   let phones = []
-  console.log("BUSCANDO O MOCK")
+
   for (let index = 1; index <= 800; index++) {
     let phone = {
       "id": index,
