@@ -1,14 +1,24 @@
 import '@testing-library/jest-dom'
 
 import * as React from 'react'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import { Provider } from 'react-redux'
-import { render as rtlRender, screen } from "@testing-library/react"
+import { render as rtlRender, screen, createEvent, fireEvent } from "@testing-library/react"
 import Menu from '../Menu'
 import store from '../../app/store'
 
 const render = (ui) => {
-  const Wrapper = ({children}) => <Provider store={store}>{children}</Provider>
-  return rtlRender(ui, {wrapper: Wrapper})
+  const history = createMemoryHistory({initialEntries: ["/", "/purchase", "/my-numbers"]})
+
+  const Wrapper = ({children}) => (
+    <Provider store={store}>
+      <Router history={history}>
+        {children}
+      </Router>
+    </Provider>
+  )
+  return {...rtlRender(ui, {wrapper: Wrapper}), history}
 }
 
 describe("Menu Component", () => {
@@ -18,9 +28,9 @@ describe("Menu Component", () => {
       const purchaseLink = screen.getByText("Purchase Phones")
       const myNumbersLink = screen.getByText("My Numbers")
 
-      expect(indexLink.href).toContain('#')
-      expect(purchaseLink.href).toContain('#purchase')
-      expect(myNumbersLink.href).toContain('#my-numbers')
+      expect(indexLink.href).toContain('/')
+      expect(purchaseLink.href).toContain('purchase')
+      expect(myNumbersLink.href).toContain('my-numbers')
     })
 
     test("should have a search component", () => {
@@ -38,5 +48,30 @@ describe("Menu Component", () => {
       expect(container.firstChild).toHaveClass('navbar')
     })
 
-    // test("should have ")
+    test("should redirect the user to home page after click in the home link", () => {
+      const {history} = render(<Menu />)
+
+      const indexLink = screen.getByText("PhoneNumbers")
+      fireEvent.click(indexLink)
+
+      expect(history.location.pathname).toBe('/')
+    })
+
+    test("should redirect the user to purchase page after click in the purchase link", () => {
+      const {history} = render(<Menu />)
+
+      const indexLink = screen.getByText("Purchase Phones")
+      fireEvent.click(indexLink)
+
+      expect(history.location.pathname).toBe('/purchase')
+    })
+
+    test("should redirect the user to purchase phones page after click in the my phones link", () => {
+      const {history} = render(<Menu />)
+
+      const indexLink = screen.getByText("My Numbers")
+      fireEvent.click(indexLink)
+
+      expect(history.location.pathname).toBe('/my-numbers')
+    })
 })

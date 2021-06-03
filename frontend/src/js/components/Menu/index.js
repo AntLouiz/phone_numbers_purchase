@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link, NavLink} from "react-router-dom";
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
 import './Menu.scss'
 
 export default function Menu () {
   return (
     <Navbar bg="light" expand="lg" collapseOnSelect={true}>
-      <Navbar.Brand href="#">PhoneNumbers</Navbar.Brand>
+      <Link to="/" className="navbar-brand">PhoneNumbers</Link>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
@@ -13,8 +14,8 @@ export default function Menu () {
           style={{ maxHeight: '100px' }}
           navbarScroll
         >
-          <Nav.Link href="#purchase">Purchase Phones</Nav.Link>
-          <Nav.Link href="#my-numbers">My Numbers</Nav.Link>
+          <Link to="/purchase" className="nav-link">Purchase Phones</Link>
+          <Link to="/my-numbers" className="nav-link">My Numbers</Link>
         </Nav>
         <Form className="d-flex">
           <FormControl
