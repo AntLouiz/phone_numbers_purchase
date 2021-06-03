@@ -1,7 +1,6 @@
-from flask import render_template
-from app import app
+from django.views import generic
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+class IndexView(generic.TemplateView):
+
+    template_name = 'index.html'

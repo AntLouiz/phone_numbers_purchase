@@ -1,12 +1,18 @@
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Home</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Phones</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <base href="/" >
+    <!-- Webpack rendered CSS -->
+    {% render_bundle 'main' 'css' %}
+</head>
+<body style="background: #3e3264;margin:0px">
     <div id="react-app"></div>
-    <script src="/static/dist/main-bundle.js"></script>
-  </body>
+    <!-- Webpack rendered JS -->
+    {% render_bundle 'main' 'js' %}
+</body>
 </html>

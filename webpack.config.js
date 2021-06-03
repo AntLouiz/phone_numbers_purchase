@@ -6,11 +6,12 @@ module.exports = {
   entry: path.join(__dirname, 'frontend/src/js/index.js'),
   output: {
     path: path.join(__dirname, 'frontend/src/dist'),
+    publicPath: '/static/',
     filename: '[name]-bundle.js'
   },
   plugins: [
     new bundleTracker({
-        path: '__dirname',
+        path: __dirname,
         filename: 'webpack-stats.json'
       }),
       new webpack.DefinePlugin({
