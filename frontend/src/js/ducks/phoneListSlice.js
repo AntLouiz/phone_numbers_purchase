@@ -1,28 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const mockedPhones = [
-  {
-    "id": 42,
-    "value": "+55 84 91234-4321",
-    "monthyPrice": "0.03",
-    "setupPrice": "3.40",
-    "currency": "U$"
-  },
-  {
-    "id": 43,
-    "value": "+55 84 91234-4321",
-    "monthyPrice": "0.15",
-    "setupPrice": "4.40",
-    "currency": "BRL$"
+
+function getMockedPhones () {
+  let phones = []
+  for (let index = 1; index < 80; index++) {
+    let phone = {
+      "id": index,
+      "value": `+55 84 91234-432${index}`,
+      "monthyPrice": `0.1${index}`,
+      "setupPrice": `${index}.40`,
+      "currency": "BRL$"
+    }
+    phones.push(phone)
   }
-]
+
+  return phones
+}
 
 export const phoneListSlice = createSlice({
     name: 'phones',
     initialState: [],
     reducers: {
         getPhones: (state) => {
-            state.push(...mockedPhones)
+          let mockedPhones = getMockedPhones()
+          state.push(...mockedPhones)
         }
     }
 })
