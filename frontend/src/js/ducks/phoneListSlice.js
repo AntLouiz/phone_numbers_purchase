@@ -25,7 +25,7 @@ export const phoneListSlice = createSlice({
           let page = payload
           let mockedPhones = getMockedPhones()
           let count = mockedPhones.length
-          let paginatedPhones = mockedPhones.slice(page, count-1)
+          let paginatedPhones = mockedPhones.slice(page-1, count)
 
           state.results = paginatedPhones
           state.count = count
