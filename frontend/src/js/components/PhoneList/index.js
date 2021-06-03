@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 import { PAGE_SIZE } from '../../settings'
 import { getPhones } from '../../ducks/phoneListSlice'
 import Paginator from '../Paginator'
+import PhoneListItem from '../PhoneListItem'
 
 
 export default function PhoneList () {
@@ -20,21 +21,25 @@ export default function PhoneList () {
 
   let phoneItems = []
   for (let phone of results) {
-    let phoneItem = (
-      <div key={phone.id}>
-        <span>{phone.value}</span>
-        <span>{phone.currency} {phone.monthyPrice}</span>
-        <span>{phone.currency} {phone.setupPrice}</span>
-      </div>
-    )
+    let phoneItem = <PhoneListItem item={phone}/>
     phoneItems.push(phoneItem)
   }
 
   return (
     <Container>
-      <Row>
-        <Col>{phoneItems}</Col>
-      </Row>
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>Phone number</th>
+          <th>Monthy price</th>
+          <th>Setup price</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
+      <tbody>
+        {phoneItems}
+      </tbody>
+      </Table>
       <Row>
         <Paginator
           pageIndex={1}
