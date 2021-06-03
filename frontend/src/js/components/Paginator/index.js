@@ -55,7 +55,6 @@ export default function Paginator (props) {
     let lastPage = 0
 
     for (let page of pageSet) {
-      console.log(page, lastPage)
       if (page != lastPage + 1) {
         let elipsisElement = <Pagination.Ellipsis key={lastPage + 1}/>
         yield elipsisElement
