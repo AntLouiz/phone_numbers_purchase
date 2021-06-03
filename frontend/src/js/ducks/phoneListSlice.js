@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 function getMockedPhones () {
   let phones = []
-  for (let index = 1; index <= 15; index++) {
+  for (let index = 1; index <= 800; index++) {
     let phone = {
       "id": index,
       "value": `+55 84 91234-432${index}`,
