@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 function getMockedPhones () {
   let phones = []
-  for (let index = 1; index < 80; index++) {
+  for (let index = 1; index <= 15; index++) {
     let phone = {
       "id": index,
       "value": `+55 84 91234-432${index}`,
@@ -19,11 +19,18 @@ function getMockedPhones () {
 
 export const phoneListSlice = createSlice({
     name: 'phones',
-    initialState: [],
+    initialState: {results: [], count: 0},
     reducers: {
-        getPhones: (state) => {
+        getPhones: (state, { payload }) => {
+          let page = payload
           let mockedPhones = getMockedPhones()
-          state.push(...mockedPhones)
+          let count = mockedPhones.length
+          let paginatedPhones = mockedPhones.slice(page, count-1)
+
+          console.log(paginatedPhones)
+
+          state.results = paginatedPhones
+          state.count = count
         }
     }
 })

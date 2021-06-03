@@ -23,4 +23,10 @@ describe("PhoneList Component", () => {
       let prices = await screen.findAllByText(valuesRegex)
       expect(prices.length).toBeGreaterThanOrEqual(1)
     })
+
+    test("should contains a paginator", async () => {
+      render(<PhoneList />)
+
+      expect(1).toBe(2)
+    })
 })
