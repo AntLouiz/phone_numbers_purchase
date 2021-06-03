@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class Phone(models.Model):
+    value = models.CharField(max_length=10)
+    monthy_price = models.IntegerField(default=1)
+    currency = models.CharField(max_length=10)
+    setup_price = models.IntegerField(default=1)
