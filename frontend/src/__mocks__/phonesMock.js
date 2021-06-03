@@ -1,3 +1,6 @@
+import { PAGE_SIZE } from '../js/settings'
+
+
 function getMockedPhones () {
   let phones = []
 
@@ -15,4 +18,17 @@ function getMockedPhones () {
   return phones
 }
 
-export default getMockedPhones
+function getPaginatedPhones (page) {
+  let mockedPhones = getMockedPhones()
+  let count = mockedPhones.length
+  let paginatedPhones = mockedPhones.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+  return {
+    results: paginatedPhones,
+    count: count,
+    next: null,
+    prev: null
+  }
+}
+
+export default getPaginatedPhones
