@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import './Paginator.scss'
 import { Pagination } from 'react-bootstrap'
 
 
@@ -20,7 +21,7 @@ export default function Paginator (props) {
 
   const integersRange = (start, end) => {
     let range = []
-    for (let index = start; index < end+1; index++) {
+    for (let index = start; index < end; index++) {
       range.push(index)
     }
     return new Set(range)
@@ -31,7 +32,7 @@ export default function Paginator (props) {
   } else {
     let initialRange = integersRange(1, 4)
     let middleRange = integersRange(Math.max(1, state.active - 2), Math.min(state.active + 3, totalPages + 1))
-    let endRange = integersRange(totalPages - 2, totalPages)
+    let endRange = integersRange(totalPages - 2, totalPages+1)
 
     pages = new Set([...initialRange, ...middleRange, ...endRange])
   }
