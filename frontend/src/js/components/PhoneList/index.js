@@ -23,11 +23,11 @@ export default function PhoneList () {
   }
 
   if (!results.length) {
-    getPhones(1, handleSuccess, handleError)
+    getPhones({pageIndex: 1}, handleSuccess, handleError)
   }
 
   const handlePageClick = (page) => {
-    getPhones(page, handleSuccess, handleError)
+    getPhones({pageIndex: page}, handleSuccess, handleError)
   }
 
   let phoneItems = []
