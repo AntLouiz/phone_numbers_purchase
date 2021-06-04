@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'backend.core.middleware.TimeDelayMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -126,6 +127,8 @@ STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
     str(BASE_DIR.parent) + '/frontend/' + '/src/dist/'
 ]
+
+REQUEST_TIME_DELAY = 1
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
