@@ -1,15 +1,9 @@
 import '@testing-library/jest-dom'
 
 import * as React from 'react'
-import { Provider } from 'react-redux'
-import { render as rtlRender, screen, fireEvent } from "@testing-library/react"
+import { screen, fireEvent } from "@testing-library/react"
+import render from '../../../__mocks__/renderMock'
 import PhoneList from '../PhoneList'
-import store from '../../app/store'
-
-const render = (ui) => {
-  const Wrapper = ({children}) => <Provider store={store}>{children}</Provider>
-  return rtlRender(ui, {wrapper: Wrapper})
-}
 
 describe("PhoneList Component", () => {
     test("should contains a list of phone numbers and some prices", async () => {
@@ -27,7 +21,7 @@ describe("PhoneList Component", () => {
     test("should contains a paginator", async () => {
       render(<PhoneList />)
 
-      let paginatorElement = await screen.getByText('…')
+      let paginatorElement = screen.getByText('…')
       expect(paginatorElement).toBeInTheDocument()
     })
 
@@ -37,7 +31,7 @@ describe("PhoneList Component", () => {
       let phoneItemElements = await screen.findAllByText(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i)
       fireEvent.click(phoneItemElements[0])
 
-      let modalElement = await screen.getByText(/Modal heading/i)
+      let modalElement = screen.getByText(/purchase/i)
       expect(modalElement).toBeInTheDocument()
     })
 })

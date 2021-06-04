@@ -1,16 +1,10 @@
 import '@testing-library/jest-dom'
 
 import * as React from 'react'
-import { Provider } from 'react-redux'
-import { render as rtlRender, screen, fireEvent } from "@testing-library/react"
+import { screen } from "@testing-library/react"
+import render from '../../../__mocks__/renderMock'
 import { getMockedPhone } from '../../../__mocks__/phonesMock'
 import PhoneListItem from '../PhoneListItem'
-import store from '../../app/store'
-
-const render = (ui) => {
-  const Wrapper = ({children}) => <Provider store={store}>{children}</Provider>
-  return rtlRender(ui, {wrapper: Wrapper})
-}
 
 describe("PhoneListItem Component", () => {
     test("should contains a phone number", async () => {
