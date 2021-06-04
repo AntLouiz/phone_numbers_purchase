@@ -23,15 +23,24 @@ function getMockedPhones () {
   return phones
 }
 
-export function getPaginatedPhones (page) {
+export function getPaginatedPhones (page, requestTime=2000) {
   let mockedPhones = getMockedPhones()
   let count = mockedPhones.length
   let paginatedPhones = mockedPhones.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
-  return {
-    results: paginatedPhones,
-    count: count,
-    next: null,
-    prev: null
-  }
+  let promise = new Promise(
+    function(resolve, reject) {
+      window.setTimeout(() => {
+        const response = {
+          results: paginatedPhones,
+          count: count,
+          next: null,
+          prev: null
+        }
+        resolve(response)
+      }, requestTime)
+    }
+  )
+
+  return promise
 }
