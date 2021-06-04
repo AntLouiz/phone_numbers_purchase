@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import phoneListSlice from '../ducks/phoneListSlice'
+import phonesSlice from '../ducks/phonesSlice'
 
 export default configureStore({
   reducer: {
-    phones: phoneListSlice
+    phones: phonesSlice
   },
 })

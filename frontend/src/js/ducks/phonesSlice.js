@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getPaginatedPhones } from '../../__mocks__/phonesMock'
 
-export const phoneListSlice = createSlice({
+export const phonesSlice = createSlice({
     name: 'phones',
     initialState: {results: [], count: 0},
     reducers: {
@@ -15,6 +15,6 @@ export const phoneListSlice = createSlice({
     }
 })
 
-export const { getPhones } = phoneListSlice.actions
+export const { getPhones } = phonesSlice.actions
 
-export default phoneListSlice.reducer
+export default phonesSlice.reducer
