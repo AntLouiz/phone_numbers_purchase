@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import getPaginatedPhones from '../../__mocks__/phonesMock'
+import { getPaginatedPhones } from '../../__mocks__/phonesMock'
 
 export const phoneListSlice = createSlice({
     name: 'phones',
