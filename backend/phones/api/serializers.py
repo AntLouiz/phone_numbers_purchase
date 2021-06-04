@@ -3,11 +3,13 @@ from backend.phones.models import Phone
 
 
 class PhoneSerializer(serializers.ModelSerializer):
+    monthyPrice = serializers.FloatField(source='monthy_price')
+    setupPrice = serializers.FloatField(source='setup_price')
 
     class Meta:
         model = Phone
         fields = ['id',
                   'value',
-                  'monthy_price',
+                  'monthyPrice',
                   'currency',
-                  'setup_price']
+                  'setupPrice']
