@@ -7,7 +7,7 @@ export default function Home () {
   return(
     <Container>
       <Row>
-        <Col>Hello there</Col>
+        <Col>Welcome</Col>
       </Row>
     </Container>
   )

@@ -14,7 +14,7 @@ const render = (ui) => {
 describe("App Component", () => {
     test("should assert header to be in document", () => {
       render(<App />)
-      const header = screen.getByText('My Flask + React web app')
+      const header = screen.getByText('Welcome')
       expect(header).toBeInTheDocument();
     })
 })
