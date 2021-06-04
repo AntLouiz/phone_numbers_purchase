@@ -57,7 +57,7 @@ export default function PhoneList () {
           handleClick={handlePageClick}
         />
       </Row>
-      <Modal show={state.showModal} onHide={closeModal}>
+      <Modal show={state.showModal} onHide={closeModal} centered={true} size={'lg'}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
