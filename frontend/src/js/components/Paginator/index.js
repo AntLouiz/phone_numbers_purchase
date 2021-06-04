@@ -28,9 +28,8 @@ export default function Paginator (props) {
     }
     return new Set(range)
   }
-
   if (totalPages <= 10) {
-    pages = integersRange(1, totalPages)
+    pages = integersRange(1, totalPages+1)
   } else {
     let initialRange = integersRange(1, 4)
     let middleRange = integersRange(Math.max(1, state.active - 2), Math.min(state.active + 3, totalPages + 1))
