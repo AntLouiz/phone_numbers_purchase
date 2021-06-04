@@ -1,11 +1,11 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import './PhoneListItem.scss'
 
 export default function PhoneListItem (props) {
-  const { item } = props
+  const { item, handleClick } = props
 
   return (
-    <tr key={item.id}>
+    <tr key={item.id} onClick={handleClick} className="item">
       <td>{item.value}</td>
       <td>{item.monthyPrice}</td>
       <td>{item.setupPrice}</td>

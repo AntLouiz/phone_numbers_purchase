@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 
 import * as React from 'react'
 import { Provider } from 'react-redux'
-import { render as rtlRender, screen } from "@testing-library/react"
+import { render as rtlRender, screen, fireEvent } from "@testing-library/react"
 import PhoneList from '../PhoneList'
 import store from '../../app/store'
 
@@ -19,7 +19,7 @@ describe("PhoneList Component", () => {
       let phonesElements = await screen.findAllByText(phoneRegex)
       expect(phonesElements.length).toBeGreaterThanOrEqual(1)
 
-      let valuesRegex = /^.+ \d+(\.+\d+)*$/i
+      let valuesRegex = /^\d+(\.+\d+)*$/i
       let prices = await screen.findAllByText(valuesRegex)
       expect(prices.length).toBeGreaterThanOrEqual(1)
     })
@@ -27,6 +27,17 @@ describe("PhoneList Component", () => {
     test("should contains a paginator", async () => {
       render(<PhoneList />)
 
-      expect(1).toBe(2)
+      let paginatorElement = await screen.getByText('…')
+      expect(paginatorElement).toBeInTheDocument()
+    })
+
+    test("should open a modal after phone item click", async () => {
+      render(<PhoneList />)
+      
+      let phoneItemElements = await screen.findAllByText(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i)
+      fireEvent.click(phoneItemElements[0])
+
+      let modalElement = await screen.getByText(/Modal heading/i)
+      expect(modalElement).toBeInTheDocument()
     })
 })

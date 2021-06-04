@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Row, Col, Table } from 'react-bootstrap'
+import { Container, Row, Modal, Table, Button } from 'react-bootstrap'
 import { PAGE_SIZE } from '../../settings'
 import { getPhones } from '../../ducks/phoneListSlice'
 import Paginator from '../Paginator'
@@ -9,6 +9,7 @@ import PhoneListItem from '../PhoneListItem'
 
 export default function PhoneList () {
   const {results, count} = useSelector((state) => state.phones)
+  const [state, setState] = useState({showModal: false})
   const dispatch = useDispatch()
 
   if (!results.length) {
@@ -19,9 +20,17 @@ export default function PhoneList () {
     dispatch(getPhones(page))
   }
 
+  const showModal = (item) => {
+    setState({showModal: true})
+  }
+
+  const closeModal = () => {
+    setState({showModal: false})
+  }
+
   let phoneItems = []
   for (let phone of results) {
-    let phoneItem = <PhoneListItem item={phone}/>
+    let phoneItem = <PhoneListItem key={phone.id} item={phone} handleClick={showModal}/>
     phoneItems.push(phoneItem)
   }
 
@@ -48,6 +57,20 @@ export default function PhoneList () {
           handleClick={handlePageClick}
         />
       </Row>
+      <Modal show={state.showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={closeModal}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   )
 }
