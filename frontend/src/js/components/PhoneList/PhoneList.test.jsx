@@ -8,8 +8,17 @@ import PhoneList from '../PhoneList'
 
 describe("PhoneList Component", () => {
     beforeEach(() => {
-      global.fetch = jest.fn(() => {
-        let promise = getPaginatedPhones(1, 1)
+      let promise
+
+      global.fetch = jest.fn((url, options) => {
+        let method = options? options.method: null
+        if (method == 'PATCH') {
+          promise = new Promise(() => {
+            return {results: [], count: 0}
+          })
+        } else {
+          promise = getPaginatedPhones(1, 1)
+        }
         let response = {
           json: () => Promise.resolve(promise)
         }
@@ -43,5 +52,21 @@ describe("PhoneList Component", () => {
 
       let modalElement = screen.getByText(/purchase/i)
       expect(modalElement).toBeInTheDocument()
+    })
+
+    test("should remove the item from list after click on modal purchase button", async () => {
+      render(<PhoneList />)
+
+      const a = jest.spyOn(PhoneList, 'handleSuccess');
+
+      let phoneItemElements = await screen.findAllByText(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i)
+      let secondItemSeen = phoneItemElements[1]
+      fireEvent.click(secondItemSeen)
+
+      let modalPurchaseButton = await screen.findByText(/purchase/i)
+      fireEvent.click(modalPurchaseButton)
+
+      expect(1).toBe(2)
+      // Todo
     })
 })
