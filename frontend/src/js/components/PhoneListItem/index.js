@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import './PhoneListItem.scss'
 import PhoneModal from '../PhoneModal'
+import { purchasePhone } from '../../api/phones'
+import { purchaseItem } from '../../ducks/phonesSlice'
+
 
 export default function PhoneListItem (props) {
   const defaultState = {showModal: false}
   const [state, setState] = useState(defaultState)
+  const dispatch = useDispatch()
   const { item } = props
 
   const handleClick = () => {
@@ -14,6 +18,16 @@ export default function PhoneListItem (props) {
 
   const closeModal = () => {
     setState({showModal: false})
+  }
+
+  const submitItem = () => {
+    const handleSuccess = () => {
+      setState({showModal: false})
+      dispatch(purchaseItem(item))
+    }
+    const handleError = (error) => console.log(error)
+
+    purchasePhone(item, handleSuccess, handleError)
   }
 
   return (
@@ -26,6 +40,7 @@ export default function PhoneListItem (props) {
       item={item}
       showModal={state.showModal}
       closeModal={closeModal}
+      submitModal={submitItem}
     />
     </tr>
   )
