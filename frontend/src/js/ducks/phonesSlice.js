@@ -14,11 +14,11 @@ export const phonesSlice = createSlice({
           state.isLoading = false
         },
         setLoading: (state, { payload }) => {
-          state.isLoading = payload.isLoading
+          state.isLoading = payload
         }
     }
 })
 
-export const { setPhones, purchaseItem } = phonesSlice.actions
+export const { setPhones, purchaseItem, setLoading } = phonesSlice.actions
 
 export default phonesSlice.reducer

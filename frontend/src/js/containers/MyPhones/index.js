@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row } from 'react-bootstrap'
 import { Container } from 'react-bootstrap'
@@ -9,7 +9,6 @@ import { setPhones, setLoading } from '../../ducks/phonesSlice'
 
 export default function MyPhones () {
   const {results, count, isLoading} = useSelector((state) => state.phones)
-  let appLoading = true
   const dispatch = useDispatch()
 
   const handlePageClick = (page) => {
@@ -34,15 +33,10 @@ export default function MyPhones () {
     console.log("Erro")
   }
 
-  if (!results.length) {
+  useEffect(() => {
+    dispatch(setLoading(true))
     getPurchasedPhones({pageIndex: 1}, handleSuccess, handleError)
-  } else {
-    appLoading = false
-  }
-
-  if (isLoading) {
-    appLoading = true
-  }
+  }, [])
 
   return (
     <Container>
@@ -50,7 +44,7 @@ export default function MyPhones () {
         <Col>List phones to purchase</Col>
       </Row>
       <Row>
-        {appLoading? "Loading...":
+        {isLoading? "Loading...":
         <PhoneList
           results={results}
           count={count}

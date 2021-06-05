@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row } from 'react-bootstrap'
 import { Container } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import PhoneList from '../../components/PhoneList'
 import { getPhones } from '../../api/phones'
-import { setPhones } from '../../ducks/phonesSlice'
+import { setPhones, setLoading } from '../../ducks/phonesSlice'
 
 export default function Phones () {
-  const {results, count} = useSelector((state) => state.phones)
+  const {results, count, isLoading} = useSelector((state) => state.phones)
   const dispatch = useDispatch()
 
   const handlePageClick = (page) => {
     const handleSuccess = (data) => {
+      dispatch(setLoading(false))
       dispatch(setPhones(data))
     }
 
@@ -32,9 +33,10 @@ export default function Phones () {
     console.log("Erro")
   }
 
-  if (!results.length) {
+  useEffect(() => {
+    dispatch(setLoading(true))
     getPhones({pageIndex: 1}, handleSuccess, handleError)
-  }
+  }, [])
 
   return (
     <Container>
@@ -42,11 +44,13 @@ export default function Phones () {
         <Col>List phones to purchase</Col>
       </Row>
       <Row>
+        {isLoading? "Loading...":
         <PhoneList
           results={results}
           count={count}
           handlePageClick={handlePageClick}
         />
+        }
       </Row>
     </Container>
   )
