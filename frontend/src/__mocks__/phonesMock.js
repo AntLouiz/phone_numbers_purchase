@@ -37,11 +37,6 @@ export function getPaginatedPhones (page, requestTime=2000) {
 
   let promise = new Promise(
     function(resolve) {
-      if (!requestTime) {
-        resolve(response)
-        return
-      }
-
       window.setTimeout(() => {
         resolve(response)
       }, requestTime)

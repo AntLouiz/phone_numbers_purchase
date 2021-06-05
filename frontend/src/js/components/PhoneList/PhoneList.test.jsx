@@ -9,7 +9,7 @@ import PhoneList from '../PhoneList'
 describe("PhoneList Component", () => {
     beforeEach(() => {
       global.fetch = jest.fn(() => {
-        let promise = getPaginatedPhones(1, null)
+        let promise = getPaginatedPhones(1, 1)
         let response = {
           json: () => Promise.resolve(promise)
         }
