@@ -1,5 +1,6 @@
 import { PAGE_SIZE } from '../js/settings'
 
+const ITEMS_SIZE = 800
 
 export function getMockedPhone (index=1) {
   let phone = {
@@ -15,7 +16,7 @@ export function getMockedPhone (index=1) {
 function getMockedPhones () {
   let phones = []
 
-  for (let index = 1; index <= 800; index++) {
+  for (let index = 1; index <= ITEMS_SIZE; index++) {
     let phone = getMockedPhone(index)
     phones.push(phone)
   }
