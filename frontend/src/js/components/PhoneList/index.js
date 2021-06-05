@@ -1,34 +1,12 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Table } from 'react-bootstrap'
 import { PAGE_SIZE } from '../../settings'
-import { getPhones } from '../../api/phones'
-import { setPhones } from '../../ducks/phonesSlice'
 import Paginator from '../Paginator'
 import PhoneListItem from '../PhoneListItem'
 
 
-export default function PhoneList () {
-  const {results, count} = useSelector((state) => state.phones)
-  const dispatch = useDispatch()
-
-
-  const handleSuccess = (data) => {
-    dispatch(setPhones(data))
-  }
-
-  const handleError = (data) => {
-    console.log(data)
-    console.log("Erro")
-  }
-
-  if (!results.length) {
-    getPhones({pageIndex: 1}, handleSuccess, handleError)
-  }
-
-  const handlePageClick = (page) => {
-    getPhones({pageIndex: page}, handleSuccess, handleError)
-  }
+export default function PhoneList (props) {
+  const {results, count, handlePageClick} = props
 
   let phoneItems = []
   for (let phone of results) {
