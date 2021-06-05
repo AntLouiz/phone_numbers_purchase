@@ -6,3 +6,4 @@ class Phone(models.Model):
     monthy_price = models.FloatField(default=1.0)
     currency = models.CharField(max_length=10)
     setup_price = models.FloatField(default=1.0)
+    is_purchased = models.BooleanField(default=False)

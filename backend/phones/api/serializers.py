@@ -5,6 +5,7 @@ from backend.phones.models import Phone
 class PhoneSerializer(serializers.ModelSerializer):
     monthyPrice = serializers.FloatField(source='monthy_price')
     setupPrice = serializers.FloatField(source='setup_price')
+    isPurchased = serializers.BooleanField(write_only=True, source='is_purchased')
 
     class Meta:
         model = Phone
@@ -12,4 +13,5 @@ class PhoneSerializer(serializers.ModelSerializer):
                   'value',
                   'monthyPrice',
                   'currency',
-                  'setupPrice']
+                  'setupPrice',
+                  'isPurchased']

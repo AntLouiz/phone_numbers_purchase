@@ -13,4 +13,4 @@ class PhonePagination(PageNumberPagination):
 class PhoneViewSet(viewsets.ModelViewSet):
     serializer_class = PhoneSerializer
     pagination_class = PhonePagination
-    queryset = Phone.objects.all()
+    queryset = Phone.objects.filter(is_purchased=False)
