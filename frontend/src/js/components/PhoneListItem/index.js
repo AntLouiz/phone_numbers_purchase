@@ -10,7 +10,7 @@ export default function PhoneListItem (props) {
   const defaultState = {showModal: false}
   const [state, setState] = useState(defaultState)
   const dispatch = useDispatch()
-  const { item } = props
+  const { item, isEdition } = props
 
   const handleClick = () => {
     setState({showModal: true})
@@ -41,6 +41,7 @@ export default function PhoneListItem (props) {
       showModal={state.showModal}
       closeModal={closeModal}
       submitModal={submitItem}
+      isEdition={isEdition}
     />
     </tr>
   )

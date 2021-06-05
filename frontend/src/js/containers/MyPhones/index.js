@@ -49,6 +49,7 @@ export default function MyPhones () {
           results={results}
           count={count}
           handlePageClick={handlePageClick}
+          isEdition={true}
         />
         }
       </Row>

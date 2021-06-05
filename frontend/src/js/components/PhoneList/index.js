@@ -6,12 +6,12 @@ import PhoneListItem from '../PhoneListItem'
 
 
 export default function PhoneList (props) {
-  const {results, count, handlePageClick} = props
+  const {results, count, handlePageClick, isEdition} = props
 
   let phoneItems = []
   for (let phone of results) {
     let phoneItem = (
-      <PhoneListItem key={phone.id} item={phone}/>
+      <PhoneListItem key={phone.id} item={phone} isEdition={isEdition}/>
     )
     phoneItems.push(phoneItem)
   }
