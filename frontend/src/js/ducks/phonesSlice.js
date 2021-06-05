@@ -7,10 +7,13 @@ export const phonesSlice = createSlice({
         setPhones: (state, { payload }) => {
           state.results = payload.results
           state.count = payload.count
+        },
+        purchaseItem: (state, { payload }) => {
+          state.results = state.results.filter((e) => e.id != payload.id)
         }
     }
 })
 
-export const { setPhones } = phonesSlice.actions
+export const { setPhones, purchaseItem } = phonesSlice.actions
 
 export default phonesSlice.reducer
