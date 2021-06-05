@@ -3,9 +3,19 @@ import '@testing-library/jest-dom'
 import * as React from 'react'
 import { screen, fireEvent } from "@testing-library/react"
 import render from '../../../__mocks__/renderMock'
+import { getPaginatedPhones } from '../../../__mocks__/phonesMock'
 import PhoneList from '../PhoneList'
 
 describe("PhoneList Component", () => {
+    beforeEach(() => {
+      global.fetch = jest.fn(() => {
+        let promise = getPaginatedPhones(1, null)
+        let response = {
+          json: () => Promise.resolve(promise)
+        }
+        return Promise.resolve(response)
+      })
+    })
     test("should contains a list of phone numbers and some prices", async () => {
       render(<PhoneList />)
 

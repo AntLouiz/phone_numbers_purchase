@@ -1,9 +1,6 @@
-import { getPaginatedPhones } from '../../__mocks__/phonesMock'
-
 function getPhones (payload, handleSuccess, handleError) {
   const { pageIndex } = payload
   let url = `/api/phones/?page=${pageIndex}`
-  // let request = getPaginatedPhones(payload)
 
   let request = fetch(url)
 
