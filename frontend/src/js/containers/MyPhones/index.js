@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row } from 'react-bootstrap'
 import { Container } from 'react-bootstrap'
@@ -9,6 +9,7 @@ import { setPhones, setLoading } from '../../ducks/phonesSlice'
 
 export default function MyPhones () {
   const {results, count, isLoading} = useSelector((state) => state.phones)
+  const [state, setState] = useState([])
   const dispatch = useDispatch()
 
   const handlePageClick = (page) => {
@@ -36,7 +37,7 @@ export default function MyPhones () {
   useEffect(() => {
     dispatch(setLoading(true))
     getPurchasedPhones({pageIndex: 1}, handleSuccess, handleError)
-  }, [])
+  }, [state])
 
   return (
     <Container>

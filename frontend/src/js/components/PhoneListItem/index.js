@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import './PhoneListItem.scss'
 import PhoneModal from '../PhoneModal'
-import { purchasePhone } from '../../api/phones'
-import { purchaseItem } from '../../ducks/phonesSlice'
+import { Button } from 'react-bootstrap'
+import { purchasePhone, removePhone } from '../../api/phones'
+import { purchaseItem, removeItem } from '../../ducks/phonesSlice'
 
 
 export default function PhoneListItem (props) {
@@ -30,19 +31,41 @@ export default function PhoneListItem (props) {
     purchasePhone(item, handleSuccess, handleError)
   }
 
+  const removeListItem = () => {
+    const handleSuccess = () => {
+      setState({showModal: false})
+      dispatch(removeItem(item))
+    }
+    const handleError = (error) => console.log(error)
+
+    removePhone(item, handleSuccess, handleError)
+  }
+
+  let modal = (<PhoneModal
+    item={item}
+    showModal={state.showModal}
+    closeModal={closeModal}
+    submitModal={submitItem}
+    isEdition={isEdition}
+  />)
+
+  if (isEdition) {
+    modal = null
+  }
+
   return (
     <tr key={item.id} className="item">
     <td onClick={handleClick}>{item.value}</td>
     <td onClick={handleClick}>{item.monthyPrice}</td>
     <td onClick={handleClick}>{item.setupPrice}</td>
     <td onClick={handleClick}>{item.currency}</td>
-    <PhoneModal
-      item={item}
-      showModal={state.showModal}
-      closeModal={closeModal}
-      submitModal={submitItem}
-      isEdition={isEdition}
-    />
+    {modal}
+    {isEdition?
+      <td>
+      <Button variant="danger" onClick={removeListItem}>
+        Remove
+      </Button>
+      </td>: null}
     </tr>
   )
 }

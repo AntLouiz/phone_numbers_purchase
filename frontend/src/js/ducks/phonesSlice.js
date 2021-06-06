@@ -13,12 +13,16 @@ export const phonesSlice = createSlice({
           state.results = state.results.filter((e) => e.id != payload.id)
           state.isLoading = false
         },
+        removeItem: (state, { payload }) => {
+          state.results = state.results.filter((e) => e.id != payload.id)
+          state.isLoading = false
+        },
         setLoading: (state, { payload }) => {
           state.isLoading = payload
         }
     }
 })
 
-export const { setPhones, purchaseItem, setLoading } = phonesSlice.actions
+export const { setPhones, purchaseItem, removeItem, setLoading } = phonesSlice.actions
 
 export default phonesSlice.reducer
