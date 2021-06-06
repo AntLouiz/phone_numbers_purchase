@@ -1,8 +1,16 @@
 import { getPaginatedPhones } from '../../__mocks__/phonesMock'
 
 export function getPhones (payload, handleSuccess, handleError) {
-  const { pageIndex } = payload
-  let url = `/api/phones/?page=${pageIndex}`
+  const { pageIndex, search } = payload
+  let url = "/api/phones/"
+
+  if (pageIndex) {
+    url = `${url}?page=${pageIndex}`
+  }
+
+  if (search) {
+    url = `${url}?search=${search}`
+  }
 
   let request = fetch(url)
   // let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
@@ -16,8 +24,16 @@ export function getPhones (payload, handleSuccess, handleError) {
 
 
 export function getPurchasedPhones (payload, handleSuccess, handleError) {
-  const { pageIndex } = payload
-  let url = `/api/phones/purchases/?page=${pageIndex}`
+  const { pageIndex, search } = payload
+  let url = "/api/phones/purchases/"
+
+  if (pageIndex) {
+    url = `${url}?page=${pageIndex}`
+  }
+
+  if (search) {
+    url = `${url}?search=${search}`
+  }
 
   let request = fetch(url)
   // let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})

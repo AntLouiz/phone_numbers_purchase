@@ -1,0 +1,25 @@
+.form-control {
+  &:focus {
+    box-shadow: none;
+    border-right: none;
+  }
+}
+
+.clear-btn {
+  background: white;
+  color: red;
+  border-left: none;
+  border-color: #cacaca;
+
+  &:hover, &:active {
+    background: white;
+    color: #7c4de6;
+    border-left: none;
+    border-color: #cacaca;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-right: none;
+  }
+}
