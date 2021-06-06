@@ -54,8 +54,8 @@ export function removePhone (payload, handleSuccess, handleError) {
   const { id } = payload
   let url = `/api/phones/${id}/`
   const requestOptions = {
-    method: 'PATCH',
-    body: JSON.stringify({'isActive': false, 'id': id}),
+    method: 'DELETE',
+    body: JSON.stringify({'id': id}),
     headers: new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
