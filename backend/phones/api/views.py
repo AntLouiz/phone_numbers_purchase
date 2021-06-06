@@ -29,10 +29,9 @@ class PhoneViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(phones, many=True)
         return Response(serializer.data)
 
-    def update(self, request, pk, partial):
+    def destroy(self, request, pk):
         instance = get_object_or_404(Phone.objects.filter(is_purchased=True), pk=pk)
-        print(request.data)
-        serializer = self.serializer_class(instance, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        instance.is_active = False
+        instance.save()
+        serializer = self.get_serializer(instance)
         return Response(serializer.data)
