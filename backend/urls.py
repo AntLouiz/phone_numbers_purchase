@@ -10,5 +10,5 @@ router.register('phones', PhoneViewSet, basename='order')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.core.urls', namespace='core')),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
 ]
