@@ -7,3 +7,4 @@ class Phone(models.Model):
     currency = models.CharField(max_length=10)
     setup_price = models.FloatField(default=1.0)
     is_purchased = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
