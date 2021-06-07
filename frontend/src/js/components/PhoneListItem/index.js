@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import './PhoneListItem.scss'
-import PhoneModal from '../PhoneModal'
 import { Button } from 'react-bootstrap'
-import { purchasePhone, removePhone } from '../../api/phones'
 import { purchaseItem, removeItem, setFetching } from '../../ducks/phonesSlice'
+import { purchasePhone, removePhone } from '../../api/phones'
+import PhoneModal from '../PhoneModal'
+import ButtonLoader from '../ButtonLoader'
+import './PhoneListItem.scss'
 
 
 export default function PhoneListItem (props) {
-  const defaultState = {showModal: false}
+  const defaultState = {showModal: false, isLoading: false}
   const [state, setState] = useState(defaultState)
   const dispatch = useDispatch()
   const { item, isEdition } = props
@@ -35,6 +36,7 @@ export default function PhoneListItem (props) {
 
   const removeListItem = () => {
     dispatch(setFetching(true))
+    setState({isLoading: true})
 
     const handleSuccess = () => {
       setState({showModal: false})
@@ -53,8 +55,17 @@ export default function PhoneListItem (props) {
     isEdition={isEdition}
   />)
 
+  let actions = null
+
   if (isEdition) {
     modal = null
+    actions = (
+      <td>
+        <Button variant="danger" onClick={removeListItem} >
+          {state.isLoading? <ButtonLoader />: "Remove"}
+        </Button>
+      </td>
+    )
   }
 
   return (
@@ -64,12 +75,7 @@ export default function PhoneListItem (props) {
     <td onClick={handleClick}>{item.setupPrice}</td>
     <td onClick={handleClick}>{item.currency}</td>
     {modal}
-    {isEdition?
-      <td>
-      <Button variant="danger" onClick={removeListItem}>
-        Remove
-      </Button>
-      </td>: null}
+    {actions}
     </tr>
   )
 }
