@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import PhoneList from '../../components/PhoneList'
 import Search from '../../components/Search'
+import Loader from '../../components/Loader'
 import { getPurchasedPhones } from '../../api/phones'
 import { setPhones, setLoading } from '../../ducks/phonesSlice'
 
@@ -49,7 +50,7 @@ export default function MyPhones () {
       </Row>
       <Search handleSearch={handleSearch}/>
       <Row>
-        {isLoading? "Loading...":
+        {isLoading? <Loader />:
         <PhoneList
           results={results}
           count={count}
