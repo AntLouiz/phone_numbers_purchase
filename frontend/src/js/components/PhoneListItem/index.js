@@ -4,7 +4,7 @@ import './PhoneListItem.scss'
 import PhoneModal from '../PhoneModal'
 import { Button } from 'react-bootstrap'
 import { purchasePhone, removePhone } from '../../api/phones'
-import { purchaseItem, removeItem } from '../../ducks/phonesSlice'
+import { purchaseItem, removeItem, setFetching } from '../../ducks/phonesSlice'
 
 
 export default function PhoneListItem (props) {
@@ -22,6 +22,8 @@ export default function PhoneListItem (props) {
   }
 
   const submitItem = () => {
+    dispatch(setFetching(true))
+
     const handleSuccess = () => {
       setState({showModal: false})
       dispatch(purchaseItem(item))
@@ -32,6 +34,8 @@ export default function PhoneListItem (props) {
   }
 
   const removeListItem = () => {
+    dispatch(setFetching(true))
+
     const handleSuccess = () => {
       setState({showModal: false})
       dispatch(removeItem(item))

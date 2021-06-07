@@ -12,8 +12,8 @@ export function getPhones (payload, handleSuccess, handleError) {
     url = `${url}?search=${search}`
   }
 
-  let request = fetch(url)
-  // let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
+  // let request = fetch(url)
+  let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
 
   request.then((response) => {
     return response.json()
