@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { purchaseItem, removeItem, setFetching } from '../../ducks/phonesSlice'
+import { purchaseItem, removeItem, setFetching, setAlert } from '../../ducks/phonesSlice'
 import { purchasePhone, removePhone } from '../../api/phones'
 import PhoneModal from '../PhoneModal'
 import ButtonLoader from '../ButtonLoader'
@@ -25,11 +25,12 @@ export default function PhoneListItem (props) {
   const submitItem = () => {
     dispatch(setFetching(true))
 
-    const handleSuccess = () => {
+    const handleSuccess = (message, data) => {
       setState({showModal: false})
       dispatch(purchaseItem(item))
+      dispatch(setAlert({message: message, severity: 'success'}))
     }
-    const handleError = (error) => console.log(error)
+    const handleError = (message, error) => console.log(error)
 
     purchasePhone(item, handleSuccess, handleError)
   }
@@ -38,11 +39,12 @@ export default function PhoneListItem (props) {
     dispatch(setFetching(true))
     setState({isLoading: true})
 
-    const handleSuccess = () => {
+    const handleSuccess = (message, data) => {
       setState({showModal: false})
       dispatch(removeItem(item))
+      dispatch(setAlert({message: message, severity: 'success'}))
     }
-    const handleError = (error) => console.log(error)
+    const handleError = (message, error) => console.log(error)
 
     removePhone(item, handleSuccess, handleError)
   }

@@ -35,8 +35,8 @@ export function getPurchasedPhones (payload, handleSuccess, handleError) {
     url = `${url}?search=${search}`
   }
 
-  let request = fetch(url)
-  // let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
+  // let request = fetch(url)
+  let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
 
   request.then((response) => {
     return response.json()
@@ -62,8 +62,8 @@ export function purchasePhone (payload, handleSuccess, handleError) {
   request.then((response) => {
     return response.json()
   }).then((data) => {
-    handleSuccess(data)
-  }).catch((error) => handleError(error))
+    handleSuccess('Purchased successful', data)
+  }).catch((error) => handleError('Error occurred', error))
 }
 
 export function removePhone (payload, handleSuccess, handleError) {
@@ -83,6 +83,6 @@ export function removePhone (payload, handleSuccess, handleError) {
   request.then((response) => {
     return response.json()
   }).then((data) => {
-    handleSuccess(data)
-  }).catch((error) => handleError(error))
+    handleSuccess('Removed successful', data)
+  }).catch((error) => handleError('Error occurred', data))
 }

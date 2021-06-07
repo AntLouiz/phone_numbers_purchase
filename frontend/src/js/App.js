@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import {
   Switch,
   Route,
@@ -10,12 +11,19 @@ import Home from './containers/Home'
 import Purchase from './containers/Purchase'
 import MyPhones from './containers/MyPhones'
 import Footer from './containers/Footer'
+import DismissibleAlert from './components/DismissibleAlert'
 
 
 export default function App () {
+  const {alert} = useSelector((state) => state.phones)
+
   return (
     <HashRouter>
       <Menu />
+      {alert.message?
+          <DismissibleAlert message={alert.message} severity={alert.severity}/>:
+          null
+      }
       <Switch>
       <Route
         path='/'
