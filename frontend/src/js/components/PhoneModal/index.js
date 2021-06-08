@@ -31,8 +31,6 @@ export default function PhoneModal (props) {
     let masked = event.target.value
     let value = masked.replace(/\s*\+*\-*/g, '')
 
-    console.log(masked)
-
     let region = value.substring(0, 2)
     let ddd = value.substring(2,4)
 
