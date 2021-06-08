@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Container, Row, Table } from 'react-bootstrap'
+import { setFetching, setAlert, postItem } from '../../ducks/phonesSlice'
+import { postPhone } from '../../api/phones'
 import { PAGE_SIZE } from '../../settings'
 import Paginator from '../Paginator'
 import PhoneListItem from '../PhoneListItem'
@@ -8,6 +11,8 @@ import PhoneModal from '../PhoneModal'
 
 export default function PhoneList (props) {
   const {results, count, handlePageClick, isEdition} = props
+  const [showModal, setShow] = useState(true)
+  const dispatch = useDispatch()
 
   let phoneItems = []
   for (let phone of results) {
@@ -21,8 +26,8 @@ export default function PhoneList (props) {
     dispatch(setFetching(true))
 
     const handleSuccess = (message, data) => {
-      setState({showModal: false})
-      dispatch(purchaseItem(item))
+      setShow(false)
+      dispatch(postItem(data))
       dispatch(setAlert({message: message, severity: 'success'}))
     }
     const handleError = (message, error) => console.log(error)
@@ -36,6 +41,7 @@ export default function PhoneList (props) {
         buttonText={'Create'}
         buttonClass={'btn-success'}
         submitModal={submitItem}
+        showModal={showModal}
       />
       <Table striped bordered hover>
       <thead>

@@ -6,20 +6,18 @@ import ButtonLoader from '../ButtonLoader'
 
 export default function PhoneModal (props) {
   const {isFetching} = useSelector((state) => state.phones)
+  const {item, buttonText, buttonClass, submitModal, showModal, isEdition} = props
+
   const defaultPhoneState = {
-    value: "",
-    masked: "",
-    monthyPrice: "",
-    currency: "",
-    setupPrice: ""
+    id: item.id,
+    value: item.value,
+    masked: item.value,
+    monthyPrice: item.monthyPrice,
+    currency: item.currency,
+    setupPrice: item.setupPrice
   }
+
   const [state, setState] = useState({validated: false, showModal: false, phone: defaultPhoneState})
-  const {item, buttonText, buttonClass, submitModal, isEdition} = props
-
-  if (item) {
-    console.log(item)
-  }
-
   const handleClick = () => {
     setState({...state, showModal: true})
   }
@@ -48,7 +46,7 @@ export default function PhoneModal (props) {
       setTimeout(() => submitModal(phone), 200)
     }
 
-    setState({validated: true, phone: state.phone})
+    setState({...state, validated: true, phone: state.phone})
   }
 
   const handleChange = (event) => {
@@ -71,7 +69,7 @@ export default function PhoneModal (props) {
     masked = `+${region} ${ddd} ${number}`
     masked = masked.trim()
 
-    setState({phone: {value: value, masked: masked}})
+    setState({...state, phone: {value: value, masked: masked}})
   }
 
   const formInputs = (
@@ -96,20 +94,20 @@ export default function PhoneModal (props) {
         <Col xs={2}>
         <Form.Group className="mb-3">
           <Form.Label>Currency:</Form.Label>
-          <Form.Control name="currency" type="text" required placeholder="U$" />
+          <Form.Control name="currency" type="text" defaultValue={state.phone.currency} required placeholder="U$" />
         </Form.Group>
         </Col>
         <Col xs={2}>
         <Form.Group className="mb-3">
-          <Form.Label>Monthly price:</Form.Label>
-          <Form.Control name="monthyPrice" type="number" required placeholder="Ex: 0.25" />
+          <Form.Label>Monthy price:</Form.Label>
+          <Form.Control name="monthyPrice" type="number" defaultValue={state.phone.monthyPrice} required placeholder="Ex: 0.25" />
         </Form.Group>
         </Col>
   
         <Col xs={2}>
         <Form.Group className="mb-3">
           <Form.Label>Setup price:</Form.Label>
-          <Form.Control name="setupPrice" type="number" required placeholder="Ex: 1.25" />
+          <Form.Control name="setupPrice" type="number" defaultValue={state.phone.setupPrice} required placeholder="Ex: 1.25" />
         </Form.Group>
         </Col>
         </Row>
@@ -121,7 +119,7 @@ export default function PhoneModal (props) {
 
   return (
     <div>
-      <Modal show={state.showModal} onHide={handleClose} centered={true} size={'lg'}>
+      <Modal show={state.showModal && showModal} onHide={handleClose} centered={true} size={'lg'}>
       <Form noValidate validated={state.validated} onSubmit={handleSubmit}>
       <Modal.Header closeButton>
         <Modal.Title>{modalTitle}</Modal.Title>
@@ -139,4 +137,15 @@ export default function PhoneModal (props) {
       <Button onClick={handleClick} className={buttonClass}>{buttonText}</Button>
     </div>
   )
+}
+
+PhoneModal.defaultProps = {
+  showModal: true,
+  item: {
+    id: null,
+    value: "",
+    masked: "",
+    monthyPrice: "",
+    currency: "",
+    setupPrice: ""}
 }
