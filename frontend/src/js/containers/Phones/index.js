@@ -14,19 +14,6 @@ export default function Phones () {
   const [state] = useState([])
   const dispatch = useDispatch()
 
-  const handlePageClick = (page) => {
-    const handleSuccess = (data) => {
-      dispatch(setLoading(false))
-      dispatch(setPhones(data))
-    }
-
-    const handleError = (data) => {
-      console.log(data)
-      console.log("Erro")
-    }
-    getPhones({pageIndex: page}, handleSuccess, handleError)
-  }
-
   const handleSuccess = (data) => {
     dispatch(setPhones(data))
   }
@@ -60,7 +47,6 @@ export default function Phones () {
         <PhoneList
           results={results}
           count={count}
-          handlePageClick={handlePageClick}
         />
         }
       </Row>
