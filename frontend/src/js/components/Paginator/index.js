@@ -7,8 +7,15 @@ export default function Paginator (props) {
   const pageIndex = props.pageIndex
   const count = props.count
   const pageSize = props.pageSize
-  const totalPages = Math.ceil(count/pageSize)
+
+  let totalPages = Math.ceil(count/pageSize)
   const handleClick = props.handleClick
+
+  console.log(count, pageSize, totalPages)
+
+  if (!isFinite(totalPages)) {
+    totalPages = 1
+  }
 
   const defaultState = {active: pageIndex}
   const [state, setState] = useState(defaultState)
