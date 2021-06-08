@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { PAGE_SIZE } from '../settings'
 
 export const phonesSlice = createSlice({
     name: 'phones',
@@ -12,9 +13,12 @@ export const phonesSlice = createSlice({
           state.alert = {}
         },
         postItem: (state, { payload }) => {
-          state.results = [...state.results, payload]
+          if (state.count != PAGE_SIZE) {
+            state.results = [...state.results, payload]
+          }
           state.isLoading = false
           state.isFetching = false
+          state.count = state.count + 1
           state.alert = {}
         },
         updateItem: (state, { payload }) => {
@@ -30,6 +34,7 @@ export const phonesSlice = createSlice({
           state.results = state.results.filter((e) => e.id != payload.id)
           state.isLoading = false
           state.isFetching = false
+          state.count = state.count - 1
           state.alert = {}
         },
         setLoading: (state, { payload }) => {
