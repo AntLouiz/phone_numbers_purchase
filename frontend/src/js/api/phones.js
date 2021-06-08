@@ -23,6 +23,37 @@ export function getPhones (payload, handleSuccess, handleError) {
 }
 
 
+export function postPhone (payload, handleSuccess, handleError) {
+  const postData = {
+    'monthyPrice': payload.monthyPrice,
+    'currency': payload.currency,
+    'setupPrice': payload.setupPrice,
+    'value': payload.value,
+    'isPurchased': false,
+    'isActive': true
+  }
+
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify(postData),
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
+  }
+
+  let url = '/api/phones/'
+  let request = fetch(url, requestOptions)
+
+  request.then((response) => {
+    return response.json()
+  }).then((data) => {
+    console.log(data)
+    handleSuccess(data)
+  }).catch((error) => handleError(error))
+}
+
+
 export function getPurchasedPhones (payload, handleSuccess, handleError) {
   const { pageIndex, search } = payload
   let url = "/api/phones/purchases/"
