@@ -6,7 +6,14 @@ import ButtonLoader from '../ButtonLoader'
 
 export default function PhoneModal (props) {
   const {isFetching} = useSelector((state) => state.phones)
-  const [state, setState] = useState({validated: false, phone: {value: "", masked: ""}});
+  const defaultPhoneState = {
+    value: "",
+    masked: "",
+    monthyPrice: "",
+    currency: "",
+    setupPrice: ""
+  }
+  const [state, setState] = useState({validated: false, phone: defaultPhoneState})
   const {item, showModal, closeModal, submitModal, isEdition} = props
 
   const handleSubmit = (event) => {
@@ -16,7 +23,16 @@ export default function PhoneModal (props) {
       event.preventDefault()
       event.stopPropagation()
     } else {
-      setTimeout(submitModal, 200)
+      let phone = {
+        setupPrice: event.target.setupPrice.value,
+        monthyPrice: event.target.monthyPrice.value,
+        currency: event.target.currency.value,
+        value: state.phone.value
+      }
+
+      event.preventDefault()
+      event.stopPropagation()
+      setTimeout(() => submitModal(phone), 200)
     }
 
     setState({validated: true, phone: state.phone})
@@ -53,7 +69,7 @@ export default function PhoneModal (props) {
   const formInputs = (
     <Container>
         <Row>
-        <Col xs={8}>
+        <Col xs={4}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Phone number:</Form.Label>
           <Form.Control
@@ -69,17 +85,23 @@ export default function PhoneModal (props) {
         </Col>
         </Row>
         <Row>
-        <Col xs={4}>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Col xs={2}>
+        <Form.Group className="mb-3">
+          <Form.Label>Currency:</Form.Label>
+          <Form.Control name="currency" type="text" required placeholder="U$" />
+        </Form.Group>
+        </Col>
+        <Col xs={2}>
+        <Form.Group className="mb-3">
           <Form.Label>Monthly price:</Form.Label>
-          <Form.Control type="number" required placeholder="Ex: 0.25" />
+          <Form.Control name="monthyPrice" type="number" required placeholder="Ex: 0.25" />
         </Form.Group>
         </Col>
   
-        <Col xs={4}>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Col xs={2}>
+        <Form.Group className="mb-3">
           <Form.Label>Setup price:</Form.Label>
-          <Form.Control type="number" required placeholder="Ex: 1.25" />
+          <Form.Control name="setupPrice" type="number" required placeholder="Ex: 1.25" />
         </Form.Group>
         </Col>
         </Row>

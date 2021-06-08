@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { purchaseItem, removeItem, setFetching, setAlert } from '../../ducks/phonesSlice'
-import { purchasePhone, removePhone } from '../../api/phones'
+import { postPhone, removePhone } from '../../api/phones'
 import PhoneModal from '../PhoneModal'
 import ButtonLoader from '../ButtonLoader'
 import './PhoneListItem.scss'
@@ -22,7 +22,7 @@ export default function PhoneListItem (props) {
     setState({showModal: false})
   }
 
-  const submitItem = () => {
+  const submitItem = (item) => {
     dispatch(setFetching(true))
 
     const handleSuccess = (message, data) => {
@@ -32,7 +32,7 @@ export default function PhoneListItem (props) {
     }
     const handleError = (message, error) => console.log(error)
 
-    purchasePhone(item, handleSuccess, handleError)
+    postPhone(item, handleSuccess, handleError)
   }
 
   const removeListItem = () => {
