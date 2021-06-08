@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Container, Row, Table } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 import { setFetching, setAlert, setPhones, postItem, setLoading } from '../../ducks/phonesSlice'
 import { postPhone, getPhones } from '../../api/phones'
 import { PAGE_SIZE } from '../../settings'
@@ -8,6 +8,7 @@ import Paginator from '../Paginator'
 import PhoneListItem from '../PhoneListItem'
 import PhoneModal from '../PhoneModal'
 import Loader from '../Loader'
+import './PhoneList.scss'
 
 
 export default function PhoneList (props) {
@@ -23,6 +24,12 @@ export default function PhoneList (props) {
     phoneItems.push(phoneItem)
   }
 
+  let emptyMessage = (
+    <Row>
+      <Col className="empty-msg">Phones not found</Col>
+    </Row>
+  )
+
   let phonesTableList = (
     <Table striped bordered hover>
     <thead>
@@ -33,9 +40,7 @@ export default function PhoneList (props) {
         <th>Currency</th>
       </tr>
     </thead>
-    <tbody>
-      {phoneItems}
-    </tbody>
+    <tbody>{phoneItems}</tbody>
     </Table>
   )
 
@@ -71,14 +76,20 @@ export default function PhoneList (props) {
     getPhones({pageIndex: page}, handleSuccess, handleError)
   }
 
+  const createPhoneModalButton = (
+    <PhoneModal
+      buttonText={'Create'}
+      buttonClass={'btn-success'}
+      submitModal={submitItem}
+      showModal={state.showModal}
+    />
+  )
+
+  phonesTableList = phoneItems.length? phonesTableList: emptyMessage
+
   return (
     <Container>
-      <PhoneModal
-        buttonText={'Create'}
-        buttonClass={'btn-success'}
-        submitModal={submitItem}
-        showModal={state.showModal}
-      />
+      {createPhoneModalButton}
       {state.isLoading? <Row><Loader /></Row>: phonesTableList}
       <Row>
         <Paginator
