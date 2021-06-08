@@ -8,8 +8,7 @@ import {
 import './App.scss'
 import Menu from './components/Menu'
 import Home from './containers/Home'
-import Purchase from './containers/Purchase'
-import MyPhones from './containers/MyPhones'
+import Phones from './containers/Phones'
 import Footer from './containers/Footer'
 import DismissibleAlert from './components/DismissibleAlert'
 
@@ -31,14 +30,9 @@ export default function App () {
         render={() => <Home name="home"/>}
       />
       <Route
-        path='/purchase'
+        path='/phones'
         exact={true}
-        render={() => <Purchase name="phone"/>}
-      />
-      <Route
-        path='/my-numbers'
-        exact={true}
-        render={() => <MyPhones name="myPhones"/>}
+        render={() => <Phones name="phone"/>}
       />
       </Switch>
       <Footer />

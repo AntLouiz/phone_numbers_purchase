@@ -14,8 +14,7 @@ export default function Menu () {
           style={{ maxHeight: '100px' }}
           navbarScroll
         >
-          <Link to="/purchase" className="nav-link">Purchase Phones</Link>
-          <Link to="/my-numbers" className="nav-link">My Numbers</Link>
+          <Link to="/phones" className="nav-link">Phones numbers</Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
