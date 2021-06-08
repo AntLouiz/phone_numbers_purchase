@@ -18,10 +18,6 @@ export default function PhoneListItem (props) {
     setState({showModal: true})
   }
 
-  const closeModal = () => {
-    setState({showModal: false})
-  }
-
   const submitItem = (item) => {
     dispatch(setFetching(true))
 
@@ -31,8 +27,8 @@ export default function PhoneListItem (props) {
       dispatch(setAlert({message: message, severity: 'success'}))
     }
     const handleError = (message, error) => console.log(error)
-
-    postPhone(item, handleSuccess, handleError)
+    console.log("Update item")
+    // postPhone(item, handleSuccess, handleError)
   }
 
   const removeListItem = () => {
@@ -49,26 +45,23 @@ export default function PhoneListItem (props) {
     removePhone(item, handleSuccess, handleError)
   }
 
-  let modal = (<PhoneModal
-    item={item}
-    showModal={state.showModal}
-    closeModal={closeModal}
-    submitModal={submitItem}
-    isEdition={isEdition}
-  />)
+  let modal = (
+    <td>
+      <PhoneModal
+        item={item}
+        buttonText={'Update'}
+        submitModal={submitItem}
+        isEdition={true}
+      />
+    </td>)
 
-  let actions = null
-
-  if (isEdition) {
-    modal = null
-    actions = (
-      <td>
-        <Button variant="danger" onClick={removeListItem} >
-          {state.isLoading? <ButtonLoader />: "Remove"}
-        </Button>
-      </td>
-    )
-  }
+  let actions = (
+    <td>
+      <Button variant="danger" onClick={removeListItem} >
+        {state.isLoading? <ButtonLoader />: "Remove"}
+      </Button>
+    </td>
+  )
 
   return (
     <tr key={item.id} className="item">

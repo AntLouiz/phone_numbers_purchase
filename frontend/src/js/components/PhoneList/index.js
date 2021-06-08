@@ -3,6 +3,7 @@ import { Container, Row, Table } from 'react-bootstrap'
 import { PAGE_SIZE } from '../../settings'
 import Paginator from '../Paginator'
 import PhoneListItem from '../PhoneListItem'
+import PhoneModal from '../PhoneModal'
 
 
 export default function PhoneList (props) {
@@ -16,8 +17,26 @@ export default function PhoneList (props) {
     phoneItems.push(phoneItem)
   }
 
+  const submitItem = (item) => {
+    dispatch(setFetching(true))
+
+    const handleSuccess = (message, data) => {
+      setState({showModal: false})
+      dispatch(purchaseItem(item))
+      dispatch(setAlert({message: message, severity: 'success'}))
+    }
+    const handleError = (message, error) => console.log(error)
+
+    postPhone(item, handleSuccess, handleError)
+  }
+
   return (
     <Container>
+      <PhoneModal
+        buttonText={'Create'}
+        buttonClass={'btn-success'}
+        submitModal={submitItem}
+      />
       <Table striped bordered hover>
       <thead>
         <tr>

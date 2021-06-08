@@ -13,8 +13,21 @@ export default function PhoneModal (props) {
     currency: "",
     setupPrice: ""
   }
-  const [state, setState] = useState({validated: false, phone: defaultPhoneState})
-  const {item, showModal, closeModal, submitModal, isEdition} = props
+  const [state, setState] = useState({validated: false, showModal: false, phone: defaultPhoneState})
+  const {item, buttonText, buttonClass, submitModal, isEdition} = props
+
+  if (item) {
+    console.log(item)
+  }
+
+  const handleClick = () => {
+    setState({...state, showModal: true})
+  }
+
+  const handleClose = () => {
+    if (isFetching) return
+    setState({...state, showModal: false})
+  }
 
   const handleSubmit = (event) => {
     if (isFetching) return
@@ -36,11 +49,6 @@ export default function PhoneModal (props) {
     }
 
     setState({validated: true, phone: state.phone})
-  }
-
-  const handleClose = () => {
-    if (isFetching) return
-    closeModal()
   }
 
   const handleChange = (event) => {
@@ -112,20 +120,23 @@ export default function PhoneModal (props) {
   let modalTitle = isEdition? item.value: 'Register a new number'
 
   return (
-    <Modal show={showModal} onHide={handleClose} centered={true} size={'lg'}>
-    <Form noValidate validated={state.validated} onSubmit={handleSubmit}>
-    <Modal.Header closeButton>
-      <Modal.Title>{modalTitle}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      {formInputs}
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="primary" type="submit" disabled={!!isFetching}>
-        {isFetching? <ButtonLoader />: buttonLabel}
-      </Button>
-    </Modal.Footer>
-    </Form>
-  </Modal>
+    <div>
+      <Modal show={state.showModal} onHide={handleClose} centered={true} size={'lg'}>
+      <Form noValidate validated={state.validated} onSubmit={handleSubmit}>
+      <Modal.Header closeButton>
+        <Modal.Title>{modalTitle}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {formInputs}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" type="submit" disabled={!!isFetching}>
+          {isFetching? <ButtonLoader />: buttonLabel}
+        </Button>
+      </Modal.Footer>
+      </Form>
+      </Modal>
+      <Button onClick={handleClick} className={buttonClass}>{buttonText}</Button>
+    </div>
   )
 }
