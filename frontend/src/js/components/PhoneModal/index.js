@@ -19,7 +19,8 @@ export default function PhoneModal (props) {
 
   const [state, setState] = useState({validated: false, showModal: false, phone: defaultPhoneState})
   const handleClick = () => {
-    setState({...state, showModal: true})
+    let phone = isEdition? state.phone: defaultPhoneState
+    setState({...state, showModal: true, phone: phone})
   }
 
   const handleClose = () => {
@@ -28,15 +29,17 @@ export default function PhoneModal (props) {
   }
 
   const handleSubmit = (event) => {
+    let phone = defaultPhoneState
     if (isFetching) return
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
     } else {
-      let phone = {
-        setupPrice: event.target.setupPrice.value,
-        monthyPrice: event.target.monthyPrice.value,
+      phone = {
+        ...state.phone,
+        setupPrice: parseFloat(event.target.setupPrice.value),
+        monthyPrice: parseFloat(event.target.monthyPrice.value),
         currency: event.target.currency.value,
         value: state.phone.value
       }
@@ -46,7 +49,8 @@ export default function PhoneModal (props) {
       setTimeout(() => submitModal(phone, handleClose), 200)
     }
 
-    setState({...state, validated: true, phone: state.phone})
+    phone.masked = event.target.maskedPhone.value
+    setState({...state, validated: true, phone: phone})
   }
 
   const handleChange = (event) => {
@@ -81,6 +85,7 @@ export default function PhoneModal (props) {
           <Form.Control
             type="tel"
             maxLength="17"
+            name="maskedPhone"
             value={state.phone.masked}
             required
             pattern="[\+]\d{2}[\s]\d{2}[\s]\d{4,5}[\-]\d{4}"
@@ -94,20 +99,20 @@ export default function PhoneModal (props) {
         <Col xs={2}>
         <Form.Group className="mb-3">
           <Form.Label>Currency:</Form.Label>
-          <Form.Control name="currency" type="text" defaultValue={state.phone.currency} required placeholder="U$" />
+          <Form.Control name="currency" type="text" defaultValue={item.currency} required placeholder="U$" />
         </Form.Group>
         </Col>
         <Col xs={2}>
         <Form.Group className="mb-3">
           <Form.Label>Monthy price:</Form.Label>
-          <Form.Control name="monthyPrice" type="number" defaultValue={state.phone.monthyPrice} required placeholder="Ex: 0.25" />
+          <Form.Control name="monthyPrice" type="number" defaultValue={item.monthyPrice} required placeholder="Ex: 0.25" />
         </Form.Group>
         </Col>
   
         <Col xs={2}>
         <Form.Group className="mb-3">
           <Form.Label>Setup price:</Form.Label>
-          <Form.Control name="setupPrice" type="number" defaultValue={state.phone.setupPrice} required placeholder="Ex: 1.25" />
+          <Form.Control name="setupPrice" type="number" defaultValue={item.setupPrice} required placeholder="Ex: 1.25" />
         </Form.Group>
         </Col>
         </Row>
