@@ -11,8 +11,6 @@ export default function Paginator (props) {
   let totalPages = Math.ceil(count/pageSize)
   const handleClick = props.handleClick
 
-  console.log(count, pageSize, totalPages)
-
   if (!isFinite(totalPages)) {
     totalPages = 1
   }
