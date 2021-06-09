@@ -43,7 +43,7 @@ export default function PhoneModal (props) {
 
       event.preventDefault()
       event.stopPropagation()
-      setTimeout(() => submitModal(phone), 200)
+      setTimeout(() => submitModal(phone, handleClose), 200)
     }
 
     setState({...state, validated: true, phone: state.phone})

@@ -9,23 +9,19 @@ import './PhoneListItem.scss'
 
 
 export default function PhoneListItem (props) {
-  const defaultState = {showModal: true, isLoading: false}
+  const defaultState = {isLoading: false}
   const [state, setState] = useState(defaultState)
   const dispatch = useDispatch()
   const { item, isEdition } = props
 
-  const handleClick = () => {
-    setState({showModal: true})
-  }
-
-  const submitItem = (updatedItem) => {
+  const submitItem = (updatedItem, handleClose) => {
     updatedItem.id = item.id
     dispatch(setFetching(true))
 
     const handleSuccess = (message, data) => {
-      setState({showModal: false})
       dispatch(updateItem(data))
       dispatch(setAlert({message: message, severity: 'success'}))
+      handleClose()
     }
     const handleError = (message, error) => console.log(error)
     updatePhone(updatedItem, handleSuccess, handleError)
@@ -36,7 +32,6 @@ export default function PhoneListItem (props) {
     setState({isLoading: true})
 
     const handleSuccess = (message, data) => {
-      setState({showModal: false})
       dispatch(removeItem(item))
       dispatch(setAlert({message: message, severity: 'success'}))
     }
@@ -51,7 +46,6 @@ export default function PhoneListItem (props) {
         item={item}
         buttonText={'Update'}
         submitModal={submitItem}
-        showModal={state.showModal}
         isEdition={true}
       />
     </td>)
@@ -66,10 +60,10 @@ export default function PhoneListItem (props) {
 
   return (
     <tr key={item.id} className="item">
-    <td onClick={handleClick}>{item.value}</td>
-    <td onClick={handleClick}>{item.monthyPrice}</td>
-    <td onClick={handleClick}>{item.setupPrice}</td>
-    <td onClick={handleClick}>{item.currency}</td>
+    <td>{item.value}</td>
+    <td>{item.monthyPrice}</td>
+    <td>{item.setupPrice}</td>
+    <td>{item.currency}</td>
     {modal}
     {actions}
     </tr>

@@ -13,7 +13,7 @@ import './PhoneList.scss'
 
 export default function PhoneList (props) {
   const {results, count, isEdition} = props
-  const [state, setState] = useState({showModal: true, isLoading: false})
+  const [state, setState] = useState({isLoading: false})
   const dispatch = useDispatch()
 
   let phoneItems = []
@@ -44,13 +44,13 @@ export default function PhoneList (props) {
     </Table>
   )
 
-  const submitItem = (item) => {
+  const submitItem = (item, handleClose) => {
     dispatch(setFetching(true))
 
     const handleSuccess = (message, data) => {
-      setState({...state, showModal: false})
       dispatch(postItem(data))
       dispatch(setAlert({message: message, severity: 'success'}))
+      handleClose()
     }
     const handleError = (message, error) => console.log(error)
 
@@ -65,13 +65,13 @@ export default function PhoneList (props) {
       dispatch(setLoading(false))
       dispatch(setFetching(false))
       dispatch(setPhones(data))
-      setState({showModal: false, isLoading: false})
+      setState({isLoading: false})
     }
 
     const handleError = (data) => {
       console.log(data)
       console.log("Erro")
-      setState({showModal: false, isLoading: false})
+      setState({isLoading: false})
     }
     getPhones({pageIndex: page}, handleSuccess, handleError)
   }
@@ -81,7 +81,6 @@ export default function PhoneList (props) {
       buttonText={'Create'}
       buttonClass={'btn-success'}
       submitModal={submitItem}
-      showModal={state.showModal}
     />
   )
 
