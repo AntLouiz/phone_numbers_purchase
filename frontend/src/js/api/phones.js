@@ -1,5 +1,3 @@
-import { getPaginatedPhones } from '../../__mocks__/phonesMock'
-
 export function getPhones (payload, handleSuccess, handleError) {
   const { pageIndex, search } = payload
   let url = "/api/phones/"
@@ -12,8 +10,7 @@ export function getPhones (payload, handleSuccess, handleError) {
     url = `${url}?search=${search}`
   }
 
-  // let request = fetch(url)
-  let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
+  let request = fetch(url)
 
   request.then((response) => {
     return response.json()
@@ -23,46 +20,53 @@ export function getPhones (payload, handleSuccess, handleError) {
 }
 
 
-export function getPurchasedPhones (payload, handleSuccess, handleError) {
-  const { pageIndex, search } = payload
-  let url = "/api/phones/purchases/"
-
-  if (pageIndex) {
-    url = `${url}?page=${pageIndex}`
+export function postPhone (payload, handleSuccess, handleError) {
+  const postData = {
+    'monthyPrice': payload.monthyPrice,
+    'currency': payload.currency,
+    'setupPrice': payload.setupPrice,
+    'value': payload.value,
+    'isActive': true
   }
 
-  if (search) {
-    url = `${url}?search=${search}`
-  }
-
-  // let request = fetch(url)
-  let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
-
-  request.then((response) => {
-    return response.json()
-  }).then((data) => {
-    handleSuccess(data)
-  }).catch((error) => handleError(error))
-}
-
-export function purchasePhone (payload, handleSuccess, handleError) {
-  const { id } = payload
-  let url = `/api/phones/${id}/`
   const requestOptions = {
-    method: 'PATCH',
-    body: JSON.stringify({'isPurchased': true, 'id': id}),
+    method: 'POST',
+    body: JSON.stringify(postData),
     headers: new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     })
-  };
+  }
+
+  let url = '/api/phones/'
+  let request = fetch(url, requestOptions)
+
+  request.then((response) => {
+    return response.json()
+  }).then((data) => {
+    let message = "Phone Number registered successful."
+    handleSuccess(message, data)
+  }).catch((error) => handleError(error))
+}
+
+export function updatePhone (payload, handleSuccess, handleError) {
+  const { id } = payload
+  let url = `/api/phones/${id}/`
+  const requestOptions = {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
+  }
 
   let request = fetch(url, requestOptions)
 
   request.then((response) => {
     return response.json()
   }).then((data) => {
-    handleSuccess('Purchased successful', data)
+    handleSuccess('Updated successful', data)
   }).catch((error) => handleError('Error occurred', error))
 }
 

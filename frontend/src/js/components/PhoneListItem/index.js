@@ -1,38 +1,31 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { purchaseItem, removeItem, setFetching, setAlert } from '../../ducks/phonesSlice'
-import { purchasePhone, removePhone } from '../../api/phones'
+import { updateItem, removeItem, setFetching, setAlert } from '../../ducks/phonesSlice'
+import { updatePhone, removePhone } from '../../api/phones'
 import PhoneModal from '../PhoneModal'
 import ButtonLoader from '../ButtonLoader'
+import maskPhoneNumber from '../../utils'
 import './PhoneListItem.scss'
 
 
 export default function PhoneListItem (props) {
-  const defaultState = {showModal: false, isLoading: false}
+  const defaultState = {isLoading: false}
   const [state, setState] = useState(defaultState)
   const dispatch = useDispatch()
   const { item, isEdition } = props
 
-  const handleClick = () => {
-    setState({showModal: true})
-  }
-
-  const closeModal = () => {
-    setState({showModal: false})
-  }
-
-  const submitItem = () => {
+  const submitItem = (updatedItem, handleClose) => {
+    updatedItem.id = item.id
     dispatch(setFetching(true))
 
     const handleSuccess = (message, data) => {
-      setState({showModal: false})
-      dispatch(purchaseItem(item))
+      dispatch(updateItem(data))
       dispatch(setAlert({message: message, severity: 'success'}))
+      handleClose()
     }
     const handleError = (message, error) => console.log(error)
-
-    purchasePhone(item, handleSuccess, handleError)
+    updatePhone(updatedItem, handleSuccess, handleError)
   }
 
   const removeListItem = () => {
@@ -40,7 +33,6 @@ export default function PhoneListItem (props) {
     setState({isLoading: true})
 
     const handleSuccess = (message, data) => {
-      setState({showModal: false})
       dispatch(removeItem(item))
       dispatch(setAlert({message: message, severity: 'success'}))
     }
@@ -49,33 +41,30 @@ export default function PhoneListItem (props) {
     removePhone(item, handleSuccess, handleError)
   }
 
-  let modal = (<PhoneModal
-    item={item}
-    showModal={state.showModal}
-    closeModal={closeModal}
-    submitModal={submitItem}
-    isEdition={isEdition}
-  />)
+  let modal = (
+    <td>
+      <PhoneModal
+        item={item}
+        buttonText={'Update'}
+        submitModal={submitItem}
+        isEdition={true}
+      />
+    </td>)
 
-  let actions = null
-
-  if (isEdition) {
-    modal = null
-    actions = (
-      <td>
-        <Button variant="danger" onClick={removeListItem} >
-          {state.isLoading? <ButtonLoader />: "Remove"}
-        </Button>
-      </td>
-    )
-  }
+  let actions = (
+    <td>
+      <Button variant="danger" onClick={removeListItem} >
+        {state.isLoading? <ButtonLoader />: "Remove"}
+      </Button>
+    </td>
+  )
 
   return (
     <tr key={item.id} className="item">
-    <td onClick={handleClick}>{item.value}</td>
-    <td onClick={handleClick}>{item.monthyPrice}</td>
-    <td onClick={handleClick}>{item.setupPrice}</td>
-    <td onClick={handleClick}>{item.currency}</td>
+    <td>{maskPhoneNumber(item.value)}</td>
+    <td>{item.monthyPrice}</td>
+    <td>{item.setupPrice}</td>
+    <td>{item.currency}</td>
     {modal}
     {actions}
     </tr>

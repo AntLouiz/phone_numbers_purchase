@@ -3,6 +3,7 @@ import {Form, FormControl, Button, InputGroup} from 'react-bootstrap'
 import { debounce } from 'lodash'
 import './Search.scss'
 
+
 export default function Search (props) {
   const { handleSearch } = props
   const [state, setState] = useState({text: ""})

@@ -9,7 +9,7 @@ from backend.phones.models import Phone
 
 
 class PhonePagination(PageNumberPagination):
-    page_size = 5
+    page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 20
 
@@ -19,22 +19,10 @@ class PhoneViewSet(viewsets.ModelViewSet):
     pagination_class = PhonePagination
     filter_backends = [filters.SearchFilter]
     search_fields = ['value']
-    queryset = Phone.objects.filter(is_purchased=False, is_active=True)
-
-    @action(detail=False, methods=['get'])
-    def purchases(self, request):
-        queryset = Phone.objects.filter(is_purchased=True, is_active=True)
-        phones = self.filter_queryset(queryset)
-        page = self.paginate_queryset(phones)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(phones, many=True)
-        return Response(serializer.data)
+    queryset = Phone.objects.filter(is_active=True)
 
     def destroy(self, request, pk):
-        instance = get_object_or_404(Phone.objects.filter(is_purchased=True), pk=pk)
+        instance = get_object_or_404(Phone.objects.filter(is_active=True), pk=pk)
         instance.is_active = False
         instance.save()
         serializer = self.get_serializer(instance)

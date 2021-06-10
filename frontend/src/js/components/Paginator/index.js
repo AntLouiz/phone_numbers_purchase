@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
-import './Paginator.scss'
 import { Pagination } from 'react-bootstrap'
+import './Paginator.scss'
 
 
 export default function Paginator (props) {
   const pageIndex = props.pageIndex
   const count = props.count
   const pageSize = props.pageSize
-  const totalPages = Math.ceil(count/pageSize)
+
+  let totalPages = Math.ceil(count/pageSize)
   const handleClick = props.handleClick
+
+  if (!isFinite(totalPages)) {
+    totalPages = 1
+  }
 
   const defaultState = {active: pageIndex}
   const [state, setState] = useState(defaultState)

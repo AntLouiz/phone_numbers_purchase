@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { PAGE_SIZE } from '../settings'
+
 
 export const phonesSlice = createSlice({
     name: 'phones',
@@ -11,8 +13,20 @@ export const phonesSlice = createSlice({
           state.isFetching = false
           state.alert = {}
         },
-        purchaseItem: (state, { payload }) => {
-          state.results = state.results.filter((e) => e.id != payload.id)
+        postItem: (state, { payload }) => {
+          if (state.count != PAGE_SIZE) {
+            state.results = [...state.results, payload]
+          }
+          state.isLoading = false
+          state.isFetching = false
+          state.count = state.count + 1
+          state.alert = {}
+        },
+        updateItem: (state, { payload }) => {
+          const itemIndex = state.results.findIndex((item) => item.id == payload.id)
+          let results = [...state.results]
+          results[itemIndex] = payload
+          state.results = results
           state.isLoading = false
           state.isFetching = false
           state.alert = {}
@@ -21,6 +35,7 @@ export const phonesSlice = createSlice({
           state.results = state.results.filter((e) => e.id != payload.id)
           state.isLoading = false
           state.isFetching = false
+          state.count = state.count - 1
           state.alert = {}
         },
         setLoading: (state, { payload }) => {
@@ -37,6 +52,6 @@ export const phonesSlice = createSlice({
     }
 })
 
-export const { setPhones, purchaseItem, removeItem, setLoading, setFetching, setAlert } = phonesSlice.actions
+export const { setPhones, postItem, removeItem, setLoading, setFetching, setAlert, updateItem } = phonesSlice.actions
 
 export default phonesSlice.reducer
