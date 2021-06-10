@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PAGE_SIZE } from '../settings'
 
+
 export const phonesSlice = createSlice({
     name: 'phones',
     initialState: {results: [], count: 0, isLoading: true, isFetching: false, alert: {}},

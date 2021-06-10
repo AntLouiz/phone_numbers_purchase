@@ -5,12 +5,12 @@ import {
   Route,
   HashRouter
 } from "react-router-dom"
-import './App.scss'
 import Menu from './components/Menu'
 import Home from './containers/Home'
 import Phones from './containers/Phones'
 import Footer from './containers/Footer'
 import DismissibleAlert from './components/DismissibleAlert'
+import './App.scss'
 
 
 export default function App () {

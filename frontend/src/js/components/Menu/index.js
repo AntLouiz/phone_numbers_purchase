@@ -1,7 +1,8 @@
 import React from 'react'
-import {Link} from "react-router-dom"
-import {Navbar, Nav} from 'react-bootstrap'
+import { Link } from "react-router-dom"
+import { Navbar, Nav } from 'react-bootstrap'
 import './Menu.scss'
+
 
 export default function Menu () {
   return (

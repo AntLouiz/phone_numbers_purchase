@@ -1,5 +1,3 @@
-import { getPaginatedPhones } from '../../__mocks__/phonesMock'
-
 export function getPhones (payload, handleSuccess, handleError) {
   const { pageIndex, search } = payload
   let url = "/api/phones/"
@@ -13,7 +11,6 @@ export function getPhones (payload, handleSuccess, handleError) {
   }
 
   let request = fetch(url)
-  // let request = Promise.resolve({json: () => Promise.resolve(getPaginatedPhones(pageIndex, 1))})
 
   request.then((response) => {
     return response.json()

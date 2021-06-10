@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Row } from 'react-bootstrap'
-import { Container } from 'react-bootstrap'
-import { Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import { setPhones, setLoading } from '../../ducks/phonesSlice'
+import { getPhones } from '../../api/phones'
 import PhoneList from '../../components/PhoneList'
 import Search from '../../components/Search'
 import Loader from '../../components/Loader'
-import { getPhones } from '../../api/phones'
-import { setPhones, setLoading } from '../../ducks/phonesSlice'
+
 
 export default function Phones () {
   const {results, count, isLoading} = useSelector((state) => state.phones)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './Paginator.scss'
 import { Pagination } from 'react-bootstrap'
+import './Paginator.scss'
 
 
 export default function Paginator (props) {
