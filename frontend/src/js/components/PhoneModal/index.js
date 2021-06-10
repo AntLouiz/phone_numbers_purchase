@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
 import { Modal, Button, Form, Col, Row, Container } from 'react-bootstrap'
 import ButtonLoader from '../ButtonLoader'
+import maskPhoneNumber from '../../utils'
 
 
 export default function PhoneModal (props) {
@@ -11,7 +12,7 @@ export default function PhoneModal (props) {
   const defaultPhoneState = {
     id: item.id,
     value: item.value,
-    masked: item.value,
+    masked: maskPhoneNumber(item.value),
     monthyPrice: item.monthyPrice,
     currency: item.currency,
     setupPrice: item.setupPrice
@@ -54,24 +55,9 @@ export default function PhoneModal (props) {
   }
 
   const handleChange = (event) => {
-    let masked = event.target.value
-    let value = masked.replace(/\s*\+*\-*/g, '')
-
-    let region = value.substring(0, 2)
-    let ddd = value.substring(2,4)
-
-    let number
-    let number1 = value.substring(4,9)
-    let number2 = value.substring(9, 13)
-    
-    if (number2) {
-      number = `${number1}-${number2}`
-    } else {
-      number = `${number1}`
-    }
-
-    masked = `+${region} ${ddd} ${number}`
-    masked = masked.trim()
+    let value = event.target.value
+    value = value.replace(/\s*\+*\-*/g, '')
+    let masked = maskPhoneNumber(value)
 
     setState({...state, phone: {value: value, masked: masked}})
   }
@@ -120,7 +106,7 @@ export default function PhoneModal (props) {
   )
 
   let buttonLabel = isEdition? 'Update': 'Create'
-  let modalTitle = isEdition? item.value: 'Register a new number'
+  let modalTitle = isEdition? state.phone.masked: 'Register a new number'
 
   return (
     <div>

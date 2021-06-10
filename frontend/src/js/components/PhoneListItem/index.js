@@ -5,6 +5,7 @@ import { updateItem, removeItem, setFetching, setAlert } from '../../ducks/phone
 import { updatePhone, removePhone } from '../../api/phones'
 import PhoneModal from '../PhoneModal'
 import ButtonLoader from '../ButtonLoader'
+import maskPhoneNumber from '../../utils'
 import './PhoneListItem.scss'
 
 
@@ -60,7 +61,7 @@ export default function PhoneListItem (props) {
 
   return (
     <tr key={item.id} className="item">
-    <td>{item.value}</td>
+    <td>{maskPhoneNumber(item.value)}</td>
     <td>{item.monthyPrice}</td>
     <td>{item.setupPrice}</td>
     <td>{item.currency}</td>
